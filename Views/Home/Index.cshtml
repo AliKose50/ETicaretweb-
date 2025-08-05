@@ -1,0 +1,145 @@
+﻿@{
+    ViewData["Home"] = "Home Page";
+}
+
+<body>
+    <!-- Hero Carousel Alanı -->
+    <div class="container-fluid mb-3">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div id="header-carousel" class="carousel slide carousel-fade mb-30 mb-lg-0" data-bs-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-bs-target="#header-carousel" data-bs-slide-to="0" class="active"></li>
+                        <li data-bs-target="#header-carousel" data-bs-slide-to="1"></li>
+                        <li data-bs-target="#header-carousel" data-bs-slide-to="2"></li>
+                    </ol>
+                    <div class="carousel-inner">
+                        <div class="carousel-item position-relative active" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="~/img/Kabak.jpg" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Minyatür Kabaklar</h1>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Taş tozundan yapılmış el yapımı kabaklar ile evinize doğal bir dokunuş katın.</p>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="https://www.instagram.com/kecelerimizikacirdik/">Hemen Al</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="~/img/Soba.jpg" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Fırınlı Soba Tasarımı</h1>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Kış aylarında evinizi ısıtan taş tozundan fırınlı soba tasarımları.</p>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="https://www.instagram.com/kecelerimizikacirdik/">Hemen Al</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-item position-relative" style="height: 430px;">
+                            <img class="position-absolute w-100 h-100" src="~/img/Vazo.jpg" style="object-fit: cover;">
+                            <div class="carousel-caption d-flex flex-column align-items-center justify-content-center">
+                                <div class="p-3" style="max-width: 700px;">
+                                    <h1 class="display-4 text-white mb-3 animate__animated animate__fadeInDown">Vazo & Lokumluk</h1>
+                                    <p class="mx-md-5 px-5 animate__animated animate__bounceIn">Taş tozundan el yapımı vazo ve lokumluk setleri ile dekorasyonunuzu tamamlayın.</p>
+                                    <a class="btn btn-outline-light py-2 px-4 mt-3 animate__animated animate__fadeInUp" href="https://www.instagram.com/kecelerimizikacirdik/">Hemen Al</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="product-offer mb-30" style="height: 200px;">
+                    <img class="img-fluid" src="~/img/Kedi.jpg" alt="">
+                    <div class="offer-text">
+                        <h6 class="text-white text-uppercase">%20 İndirim</h6>
+                        <h3 class="text-white mb-3">Özel Teklif</h3>
+                        <a href="https://www.instagram.com/kecelerimizikacirdik/" class="btn btn-primary">HemeSSn Al</a>
+                    </div>
+                </div>
+                <div class="product-offer mb-30" style="height: 200px;">
+                    <img class="img-fluid" src="~/img/Radyo.jpg" alt="">
+                    <div class="offer-text">
+                        <h6 class="text-white text-uppercase">%20 İndirim</h6>
+                        <h3 class="text-white mb-3">Özel Teklif</h3>
+                        <a href="https://www.instagram.com/kecelerimizikacirdik/" class="btn btn-primary">Hemen Al</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  @*   Hakkimizfa *@
+    <div class="container py-5">
+       
+
+        <div class="row align-items-center mb-5">
+            <div class="col-md-4 text-center">
+                <img src="~/img/Kedi.jpg" class="img-fluid rounded shadow" alt="Biz Kimiz Görseli" style="max-height: 250px;">
+            </div>
+            <div class="col-md-8">
+                <div class="bg-light p-4 rounded shadow">
+                    <h3 class="text-primary mb-3"><i class="fas fa-users"></i> Biz Kimiz?</h3>
+                    <p>
+                        Ufak bir işletme kurmaya çalışan bir grup üniversite öğrencisiyiz.
+                        Sizlerin desteğiyle büyüyoruz.
+                        <br><br>
+                        <a href="@Url.Action("Contact", "Pages")">mail </a> ya da
+                        <a href="https://www.instagram.com/kecelerimizikacirdik/" target="_blank">Instagram</a> üzerinden ulaşabilirsiniz.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row align-items-center flex-md-row-reverse">
+            <div class="col-md-4 text-center">
+                <img src="~/img/Radyo.jpg" class="img-fluid rounded shadow" alt="Ne İş Yaparız Görseli" style="max-height: 250px;">
+            </div>
+            <div class="col-md-8">
+                <div class="bg-light p-4 rounded shadow">
+                    <h3 class="text-success mb-3"><i class="fas fa-hand-holding-heart"></i> Ne İş Yaparız?</h3>
+                    <p>
+                        İnsanlara güzel şeyler olduğunu hatırlatacak el yapımı hediyeler tasarlarız.
+                        Keçeden dokur, kağıda çizer, taşla şekil veririz.
+                        <br><br>
+                        Ürünlerimiz sizin seçtiğiniz renkte ya da birlikte boyamanız için tasarlanabilir.
+                        <br><br>
+                        Isparta’daysanız, atölyesiz de olsa etkinliklerimize katılabilirsiniz 💫
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+      
+  
+    <!-- Neden Biz? Alanı -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5 pb-3">
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-check text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Kaliteli Ürün</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-shipping-fast text-primary m-0 mr-2"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Ürcretsiz Kargo</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                    <h1 class="fas fa-exchange-alt text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">Farklı Renk Paletleriyle</h5>
+                </div>
+            </div>
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">
+                <div class="d-flex align-items-center bg-light mb-4" style="padding: 30px;">
+                    <h1 class="fa fa-phone-volume text-primary m-0 mr-3"></h1>
+                    <h5 class="font-weight-semi-bold m-0">7/24 Destek</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+</body>

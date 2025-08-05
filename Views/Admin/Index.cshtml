@@ -1,0 +1,209 @@
+﻿@model List<WebSıtesı.Models.Product>
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Paneli - Ürünler</title>
+    <link rel="stylesheet" href="/vendors/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/vendors/font-awesome/css/font-awesome.min.css" />
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .product-card {
+            border: 1px solid #ddd;
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+            background-color: #fff;
+        }
+
+            .product-card:hover {
+                box-shadow: 0 0 15px rgba(0,0,0,0.1);
+            }
+
+        .product-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .product-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .product-info {
+            font-size: 0.95rem;
+            color: #555;
+        }
+
+        .card-buttons {
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container mt-5">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h3>Ürün Listesi</h3>
+            <button class="btn btn-primary" data-toggle="modal" data-target="#addProductModal">
+                <i class="fa fa-plus"></i> Ürün Ekle
+            </button>
+        </div>
+
+        <div class="row">
+            @foreach (var product in Model)
+            {
+                <div class="col-md-4">
+                    <div class="product-card">
+                        <img src="@product.ImageUrl" class="product-image" alt="@product.Name" />
+                        <div class="mt-2 product-title">@product.Name</div>
+                        @* <div class="product-info">Kategori: @product.Category</div> *@
+                        <div class="product-info">Fiyat: ₺@product.Price</div>
+                        <div class="product-info">Stok: @product.Stock</div>
+                        <div class="card-buttons">
+                            <button class="btn btn-sm btn-warning" data-toggle="modal"
+                                    data-target="#editProductModal"
+                                    data-id="@product.Id"
+                                    data-name="@product.Name"
+                                   @*  data-category="@product.Category" *@
+                                 @*    data-price="@product.Price" *@
+                                   @*  data-stock="@product.Stock" *@>
+                                Düzenle
+                            </button>
+                            <button class="btn btn-sm btn-danger" onclick="deleteProduct(@product.Id)">Sil</button>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Modal: Ürün Ekle -->
+    <div class="modal fade" id="addProductModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="addProductForm" enctype="multipart/form-data">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Yeni Ürün Ekle</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group"><label>Ürün Adı</label><input type="text" name="Name" class="form-control" required /></div>
+                        <div class="form-group"><label>Kategori</label><input type="text" name="Category" class="form-control" required /></div>
+                        <div class="form-group"><label>Fiyat</label><input type="number" name="Price" class="form-control" step="0.01" required /></div>
+                        <div class="form-group"><label>Stok</label><input type="number" name="Stock" class="form-control" required /></div>
+                        <div class="form-group"><label>Görsel</label><input type="file" name="ImageFile" class="form-control" accept="image/*" required /></div>
+                    </div>
+                    <div class="modal-footer"><button type="submit" class="btn btn-success">Kaydet</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Ürün Düzenle -->
+    <div class="modal fade" id="editProductModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form id="editProductForm" enctype="multipart/form-data">
+                    <input type="hidden" name="Id" id="editId" />
+                    <div class="modal-header">
+                        <h5 class="modal-title">Ürünü Düzenle</h5>
+                        <button type="button" class="close" data-dismiss="modal"><span>&times;</span></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group"><label>Ürün Adı</label><input type="text" name="Name" id="editName" class="form-control" required /></div>
+                        <div class="form-group"><label>Kategori</label><input type="text" name="Category" id="editCategory" class="form-control" required /></div>
+                        <div class="form-group"><label>Fiyat</label><input type="number" name="Price" id="editPrice" class="form-control" step="0.01" required /></div>
+                        <div class="form-group"><label>Stok</label><input type="number" name="Stock" id="editStock" class="form-control" required /></div>
+                        <div class="form-group"><label>Yeni Görsel (değiştirmek isterseniz)</label><input type="file" name="ImageFile" class="form-control" accept="image/*" /></div>
+                    </div>
+                    <div class="modal-footer"><button type="submit" class="btn btn-primary">Güncelle</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="/vendors/jquery/dist/jquery.min.js"></script>
+    <script src="/vendors/bootstrap/dist/js/bootstrap.min.js"></script>
+
+    <script>
+        // Ürün Ekleme
+        $('#addProductForm').on('submit', function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '/Admin/Create',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    $('#addProductModal').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert("Ürün eklenemedi.");
+                }
+            });
+        });
+
+        // Düzenleme modalına veri doldur
+        $('#editProductModal').on('show.bs.modal', function (event) {
+            var button = $(event.relatedTarget);
+            $('#editId').val(button.data('id'));
+            $('#editName').val(button.data('name'));
+            $('#editCategory').val(button.data('category'));
+            $('#editPrice').val(button.data('price'));
+            $('#editStock').val(button.data('stock'));
+        });
+
+        // Ürün Güncelle
+        $('#editProductForm').on('submit', function (e) {
+            e.preventDefault();
+            var formData = new FormData(this);
+            $.ajax({
+                url: '/Admin/Edit',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function () {
+                    $('#editProductModal').modal('hide');
+                    location.reload();
+                },
+                error: function () {
+                    alert("Güncelleme sırasında hata oluştu.");
+                }
+            });
+        });
+
+        // Ürün Sil
+        function deleteProduct(id) {
+            if (confirm("Bu ürünü silmek istediğinize emin misiniz?")) {
+                $.ajax({
+                    url: '/Admin/Delete/' + id,
+                    type: 'POST',
+                    success: function () {  
+                        location.reload();
+                    },
+                    error: function () {
+                        alert("Silme işlemi başarısız.");
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>

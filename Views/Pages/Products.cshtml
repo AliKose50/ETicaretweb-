@@ -1,0 +1,22 @@
+﻿@model List<WebSıtesı.Models.Product>
+
+@{
+    ViewData["Title"] = "Ürünler";
+   
+}
+
+<<div class="product-grid">
+    @foreach (var product in Model)
+    {
+        <div class="product-card">
+            <img src="@product.ImageUrl" alt="@product.Name" class="product-image" />
+            <div class="product-content">
+                <div class="product-name">@product.Name</div>
+                
+                <div class="product-info"> @product.Category</div>
+                <div class="product-note">Ürünlerimiz Instagram üzerinden sipariş verilebilir.</div>
+                <a href="https://www.instagram.com/kecelerimizikacirdik/" target="_blank" class="product-button">İnstagram'dan Sipariş Ver</a>
+            </div>
+        </div>
+    }
+</div>
